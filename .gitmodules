@@ -1,0 +1,3 @@
+[submodule "libs/igloo"]
+	path = libs/igloo
+	url = git@github.com:joakimkarlsson/igloo.git
