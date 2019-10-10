@@ -24,4 +24,6 @@ foreach(SRC ${SRCS})
   add_executable(${EXECUTABLE_NAME} ${SRC})
 endforeach()
 
+string(TIMESTAMP GENERATE_TIME)
+string(APPEND README "\n *Write by cmake at ${GENERATE_TIME}*")
 file(WRITE README.md ${README})
