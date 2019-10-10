@@ -5,10 +5,23 @@ include_directories(libs/igloo)
 
 file(GLOB SRCS *.cpp)
 
+set(README "# Codewars\n")
+set(CMAKE_CXX_STANDARD 14)
+
 foreach(SRC ${SRCS})
-  string(REPLACE ${PROJECT_SOURCE_DIR}/
-                 ""
-                 EXECUTABLE_NAME
-                 ${SRC})
+  string(FIND ${SRC} / SPOS REVERSE)
+  string(FIND ${SRC} . EPOS REVERSE)
+  math(EXPR BEGIN ${SPOS}+1)
+  math(EXPR LENGTH ${EPOS}-${BEGIN})
+  string(SUBSTRING ${SRC}
+                   ${BEGIN}
+                   ${LENGTH}
+                   EXECUTABLE_NAME)
+  string(
+    APPEND README
+    "- [${EXECUTABLE_NAME}](https://www.codewars.com/kata/${EXECUTABLE_NAME})\n"
+    )
   add_executable(${EXECUTABLE_NAME} ${SRC})
 endforeach()
+
+file(WRITE README.md ${README})
